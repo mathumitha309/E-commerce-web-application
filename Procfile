@@ -1,2 +1,2 @@
-web: gunicorn shopkart.wsgi
+web: gunicorn shopkart.wsgi:application
 
