@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#3s!bjj+27%k0&ak#=okzln1v7*e7s^yg95i_=g0w*65g0xld_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -53,15 +54,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'shopkart.urls'
 
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-    BASE_DIR / 'shop' / 'templates',       # current
-    BASE_DIR / 'shop' / 'templates' / 'shop',  # this is where layouts/main.html exists
-],
-
-        'DIRS': [BASE_DIR / 'shop' / 'templates'],
+            BASE_DIR / 'shop' / 'templates',       # main template folder
+            BASE_DIR / 'shop' / 'templates' / 'shop',  # sub templates
+            BASE_DIR / 'shop' / 'templates' / 'layouts', # layouts folder
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,9 +133,10 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR/'static'
 STATICFILES_DIR = BASE_DIR/'static'
 
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]   # development use
-STATIC_ROOT = BASE_DIR / "staticfiles"     # deployment use
+STATIC_ROOT = BASE_DIR / "staticfiles"    
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 LOGIN_URL = '/login/'
 
