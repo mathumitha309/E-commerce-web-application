@@ -5,6 +5,19 @@ from shop.forms import customform
 from django.contrib import messages
 from django.contrib.auth import login,authenticate,logout 
 from django.contrib.auth.decorators import login_required
+from shop.models import products 
+
+
+@login_required
+def profile_page(request):
+    return render(request, 'shop/profile.html', {'user': request.user})
+
+
+@login_required
+def order_history(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'shop/order_history.html', {'orders': orders})
+
 
 def home(request):
     trending_products = products.objects.filter(trending=1)

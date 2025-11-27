@@ -56,7 +56,12 @@ ROOT_URLCONF = 'shopkart.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+    BASE_DIR / 'shop' / 'templates',       # current
+    BASE_DIR / 'shop' / 'templates' / 'shop',  # this is where layouts/main.html exists
+],
+
+        'DIRS': [BASE_DIR / 'shop' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
