@@ -31,6 +31,14 @@ ALLOWED_HOSTS = ['https://e-commerce-web-application-7kf0.onrender.com','localho
 
 # Application definition
 
+if os.environ.get('RENDER'):
+    try:
+        from django.contrib.auth.models import User
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser("admin", "admin@example.com", "admin123")
+    except:
+        pass
+
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
